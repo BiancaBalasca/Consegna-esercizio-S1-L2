@@ -1,0 +1,165 @@
+﻿08/01/2024
+Progetto S3/L5
+Bianca Ioana Balasca
+https://www.mycompiler.io/it/new/mysql 
+
+
+
+
+
+
+-- Creazione della tabella "vendite"
+CREATE TABLE vendite (
+    id_transazione INT PRIMARY KEY,
+    categoria_prodotto VARCHAR(50),
+    costo_vendita DECIMAL(10, 2),
+    sconto DECIMAL(5, 2)
+);
+
+
+-- Creazione della tabella "dettagli_vendite"
+CREATE TABLE dettagli_vendite (
+    id_transazione INT,
+    data_transazione DATE,
+    quantita INT,
+    PRIMARY KEY (id_transazione, data_transazione),
+    FOREIGN KEY (id_transazione) REFERENCES vendite(id_transazione)
+);
+
+
+INSERT INTO vendite (id_transazione, categoria_prodotto, costo_vendita, sconto) VALUES (1, 'Elettronica', 1000.00, 0.50), (2, 'Abbigliamento', 500.00, 0.55), (3, 'Casa', 200.00, 0.00), (4, 'Elettronica', 1500.00, 0.20), (5, 'Abbigliamento', 300.00, 0.10), (6, 'Casa', 1000.00, 0.15), (7, 'Sport', 120.00, 0.00), (8, 'Casa', 800.00, 0.05), (9, 'Sport', 50.00, 0.10), (10, 'Elettronica', 700.00, 0.50), (11, 'Abbigliamento', 250.00, 0.00), (12, 'Casa', 900.00, 0.10), (13, 'Sport', 80.00, 0.20), (14, 'Elettronica', 2000.00, 0.60), (15, 'Abbigliamento', 400.00, 0.05), (16, 'Sport', 150.00, 0.00), (17, 'Casa', 1100.00, 0.10), (18, 'Elettronica', 800.00, 0.15), (19, 'Abbigliamento', 450.00, 0.00), (20, 'Sport', 90.00, 0.10), (21, 'Casa', 750.00, 0.05), (22, 'Elettronica', 600.00, 0.65), (23, 'Abbigliamento', 200.00, 0.00), (24, 'Sport', 70.00, 0.20), (25, 'Casa', 950.00, 0.10), (26, 'Elettronica', 1800.00, 0.51), (27, 'Abbigliamento', 350.00, 0.05), (28, 'Sport', 130.00, 0.00), (29, 'Casa', 850.00, 0.10), (30, 'Elettronica', 500.00, 0.15);
+
+
+INSERT INTO dettagli_vendite (id_transazione, data_transazione, quantita) VALUES (1, '2020-01-01', 2), (2, '2020-01-02', 1), (3, '2020-01-03', 3), (4, '2020-01-04', 2), (5, '2020-01-05', 1), (6, '2020-01-06', 4), (7, '2020-01-07', 2), (8, '2020-01-08', 3), (9, '2020-02-09', 1), (10, '2020-02-10', 5), (11, '2020-02-11', 2), (12, '2020-01-12', 3), (13, '2020-01-13', 1), (14, '2020-01-14', 4), (15, '2020-03-15', 2), (16, '2020-03-16', 3), (17, '2020-03-17', 1), (18, '2020-01-18', 5), (19, '2020-03-19', 2), (20, '2020-01-20', 1), (21, '2020-01-21', 4), (22, '2020-07-22', 2), (23, '2020-07-23', 3), (24, '2020-07-24', 1), (25, '2020-01-25', 5), (26, '2020-01-26', 2), (27, '2020-08-27', 1), (28, '2020-08-28', 4), (29, '2020-08-29', 2), (30, '2020-01-30', 3);
+
+
+-- PUNTO 3
+
+
+-- Seleziona tutte le vendite avvenute in una specifica data
+
+
+SELECT vendite.* FROM vendite INNER JOIN dettagli_vendite ON vendite.id_transazione = dettagli_vendite.id_transazione WHERE dettagli_vendite.data_transazione = '2020-01-01';
+-- Elenco delle vendite con sconti maggiori del 50%
+SELECT * FROM vendite WHERE sconto > 0.5;
+
+
+-- PUNTO 4
+-- Calcola il totale delle vendite per categoria
+
+
+SELECT categoria_prodotto, SUM(costo_vendita*(1-sconto)) AS totale_vendite
+FROM vendite
+GROUP BY categoria_prodotto;
+
+
+-- Trova il numero totale di prodotti venduti per categoria
+
+
+SELECT categoria_prodotto, SUM(quantita) AS totale_prodotti_venduti
+FROM vendite INNER JOIN dettagli_vendite ON vendite.id_transazione = dettagli_vendite.id_transazione
+GROUP BY categoria_prodotto;
+
+
+-- PUNTO 5
+-- Seleziona le vendite dell'ultimo trimestre
+SELECT * FROM vendite INNER JOIN dettagli_vendite ON vendite.id_transazione = dettagli_vendite.id_transazione WHERE dettagli_vendite.data_transazione >= DATE_ADD(CURDATE(), INTERVAL -3 MONTH);
+
+
+
+
+-- Raggruppa le vendite per mese e calcola il totale delle vendite per ogni mese
+
+
+SELECT MONTH(data_transazione) AS mese, SUM(costo_vendita) AS totale_vendite
+FROM vendite
+JOIN dettagli_vendite ON vendite.id_transazione = dettagli_vendite.id_transazione
+GROUP BY MONTH(data_transazione)
+
+
+
+
+-- PUNTO 7
+-- Trova la categoria con lo sconto medio più alto
+
+
+SELECT categoria_prodotto, AVG(sconto) AS sconto_medio FROM vendite GROUP BY categoria_prodotto ORDER BY sconto_medio DESC LIMIT 1;
+
+
+-- PUNTO 8
+-- Confronta le vendite mese per mese per vedere l'incremento o il decremento delle vendite
+
+
+SELECT MONTH(data_transazione) AS Mese, SUM(quantita * costo_vendita * (1 - sconto)) AS Totale_Vendite FROM vendite INNER JOIN dettagli_vendite ON vendite.id_transazione = dettagli_vendite.id_transazione GROUP BY Mese;
+
+
+-- Calcola l’incremento o decremento mese per mese
+
+
+SELECT Mese, Totale_Vendite, Lag(Totale_Vendite) OVER (ORDER BY Mese) AS Vendite_Precedenti, (Totale_Vendite - Lag(Totale_Vendite) OVER (ORDER BY Mese)) AS Incremento_Decremento FROM(
+   SELECT
+     MONTH(data_transazione) AS Mese,
+     SUM(quantita * costo_vendita * (1 - sconto)) AS Totale_Vendite FROM vendite INNER JOIN dettagli_vendite ON vendite.id_transazione = dettagli_vendite.id_transazione GROUP BY Mese
+  ) AS Vendite_Mese;
+
+
+
+
+
+
+-- PUNTO 9
+-- Confronta le vendite totali in diverse stagioni
+
+
+SELECT 
+CASE
+    WHEN MONTH(data_transazione) IN (3, 4, 5) THEN 'Primavera'
+    WHEN MONTH(data_transazione) IN (6, 7, 8) THEN 'Estate'
+    WHEN MONTH(data_transazione) IN (9, 10, 11) THEN 'Autunno'
+    WHEN MONTH(data_transazione) IN (12, 1, 2) THEN 'Inverno'
+  END AS Stagione,
+  SUM(costo_vendita * (1 - sconto)) AS Vendite_Totali
+FROM vendite v
+INNER JOIN dettagli_vendite dv ON v.id_transazione = dv.id_transazione
+GROUP BY Stagione;
+
+
+
+
+
+
+-- PUNTO 10
+-- Per trovare i top 5 clienti con il maggior numero di acquisti
+
+
+CREATE TABLE clienti ( IDCliente INT PRIMARY KEY, IDVendita INT, FOREIGN KEY (IDVendita) REFERENCES vendite(id_transazione) );
+
+
+SELECT IDCliente, COUNT(*) AS NumeroAcquisti FROM clienti GROUP BY IDCliente ORDER BY NumeroAcquisti DESC LIMIT 5;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT MONTH(dv.data_transazione) AS mese, SUM(v.costo_vendita) AS totale_vendite FROM vendite v JOIN dettagli_vendite dv ON v.id_transazione = dv.id_transazione GROUP BY mese;
+SELECT MONTH(dv.data_transazione) AS mese, SUM(v.costo_vendita) AS totale_vendite FROM vendite v JOIN dettagli_vendite dv ON v.id_transazione = dv.id_transazione GROUP BY mese;
+
+
+SELECT MONTH(dv.data_transazione) AS mese, SUM(v.costo_vendita) AS totale_vendite FROM vendite v JOIN dettagli_vendite dv ON v.id_transazione = dv.id_transazione GROUP BY mese;
