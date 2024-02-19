@@ -1,0 +1,22 @@
+Progetto S9/L5
+
+Analisi Integrata delle Vendite, Costi e Cliente in Power BI
+
+Obiettivi:
+L'obiettivo di questo esercizio è creare un report complesso e interattivo in Power BI che integri tre dataset distinti: Vendite, Costi e Dati dei Clienti. 
+L'analisi mira a fornire una comprensione approfondita delle performance aziendali, evidenziando le relazioni tra vendite, costi e comportamenti dei clienti.
+
+Dataset:
+1.Vendite: Include Data Vendita, ID Prodotto, Quantità Venduta, Fatturato.
+2.Costi: Include ID Prodotto, Costo del Prodotto, Costi di Marketing, Costi Operativi.
+3.Dati dei Clienti: Include ID Cliente, Età, Sesso, Paese, Categoria di Acquisto Preferita.
+
+Passi dell'Esercizio:
+1. Caricamento e Pulizia dei Dataset: Importa i tre dataset in Power BI e usa Power Query per pulirli e prepararli. Assicurati che gli ID Prodotto e gli ID Cliente siano coerenti tra i dataset.
+2. Relazione tra i Dataset: Crea relazioni tra i dataset Vendite, Costi e Dati dei Clienti. Ad esempio, collega l'ID Prodotto tra Vendite e Costi, e l'ID Cliente tra Vendite e Dati dei Clienti.
+3. Grafico a Linee del Profitto: Usa il dataset Vendite e Costi per creare un grafico a linee che mostri l'andamento del profitto (Fatturato - Costi) nel tempo.
+4. Grafico a Barre dei Costi per Categoria di Prodotto: Crea un grafico a barre che confronti i costi totali (Costo del Prodotto + Costi di Marketing + Costi Operativi) per ciascuna categoria di prodotto.
+5. Mappa di Calore dei Clienti: Usa il dataset Dati dei Clienti per creare una mappa di calore che mostri la distribuzione dei clienti per età e sesso, o per paese e categoria di acquisto preferita.
+6. Creazione dei Segnalibri che permettano la navigazione fra le pagine del Report, inclusa una pagina iniziale che faccia da indice.
+
+Una volta finiti questi 6 punti, provate a ampliare le vostre indagini con grafici e misure che ritenete interessanti. Importante, l'ultima pagina del report deve riportare scritte le ragioni delle indagini in più che avrete proposto. 
