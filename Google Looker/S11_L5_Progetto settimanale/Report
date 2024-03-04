@@ -1,0 +1,26 @@
+
+Link Dataset Google Sheets: https://docs.google.com/spreadsheets/d/1xpcG_K4FWDMpxm8QMp_pmDS7M3TKYKNkuq7ZyLXP-JU/edit?usp=sharing  
+Link Dashboard GOOGLE LOOKER STUDIO: https://lookerstudio.google.com/reporting/abf1201c-ae82-4d66-8336-70cf9a100ad3  
+
+
+Report sulla dashboard del consumo di tisane dal 10/12/2023 al 03/03/2024
+
+La dashboard è stata progettata per fornire un'analisi dettagliata del consumo di tisane durante il periodo compreso tra il 10 dicembre 2023 e il 3 marzo 2024.
+
+La barra superiore della dashboard mostra le informazioni più importanti, tra cui la quantità delle varietà delle tisane disponibili (sei tipi di gusti), il numero totale di giorni dal primo record nel dataset e il totale delle tazze di tisane consumate in questi giorni. Inoltre, è stata aggiunta una sezione divisa per anni per una visualizzazione più chiara dei dati nel tempo.
+
+A sinistra della dashboard troviamo tre elenchi a discesa per filtrare facilmente i dati: il primo per selezionare il tipo di tisana, il secondo per scegliere il giorno della settimana e il terzo per indicare il brand delle tisane.
+
+Il primo grafico sulla sinistra mostra che Lord Nelson è il brand di tisane più consumato, suggerendo che sia il preferito dall'utente.
+
+Nel secondo grafico a torta osserviamo che l'82% delle tisane consumate sono state accompagnate da fette di limone, indicando un consumo significativo di questo ingrediente.
+
+Il terzo grafico rappresenta il totale di ogni tisana consumata al mese, mettendo in evidenza le tisane più e meno bevute. Ad esempio, nel mese di gennaio la tisana Digestì è stata la più consumata, mentre la Green Tea non è stata bevuta affatto.
+
+Accanto a questo grafico è riportato il consumo totale di tisane in ml, per avere un'idea chiara della quantità bevuta nel periodo considerato.
+
+Il quarto grafico mostra la percentuale di zucchero aggiunto alle tisane, con il 69% delle tazze bevute senza zucchero.
+
+Infine, l'ultimo grafico a torta evidenzia la tisana più bevuta, che risulta essere la Digestì.
+
+In conclusione, la dashboard fornisce una panoramica dettagliata del consumo di tisane, consentendo di analizzare facilmente le preferenze dell'utente e le abitudini di consumo nel periodo considerato.
